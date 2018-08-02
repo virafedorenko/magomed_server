@@ -53,7 +53,6 @@ public class AuthController {
         }
         User user = new User(registrationRequest.getEmail(), registrationRequest.getPassword(),
                 registrationRequest.getName());
-
         User registered = userService.register(user);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api/users/{username}")

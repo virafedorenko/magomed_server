@@ -1,11 +1,27 @@
 package app.entity;
 
-// TODO: 01.08.2018 add hibernate annotations for this class
-public class User {
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column
     private String id;
+    @Column
     private String email;
+    @Column
     private String password;
+    @Column
     private String name;
+
+    public User() {
+    }
 
     public User(String email, String password, String name) {
         this.email = email;

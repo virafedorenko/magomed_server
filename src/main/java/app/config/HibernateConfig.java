@@ -42,8 +42,5 @@ public class HibernateConfig {
         txManager.setSessionFactory(sessionFactory().getObject());
         return txManager;
     }
-    @Bean
-    public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
-        return entityManagerFactory.createEntityManager();
-    }
+
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import org.hibernate.SessionFactory;
 
+import javax.persistence.EntityManager;
+
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 

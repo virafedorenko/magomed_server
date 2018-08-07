@@ -1,0 +1,1 @@
+insert into users values ('fgkhfghfkgkfhjjj', 'nastia.federenko@gmail.com', '123456', 'Anastasiia Fedorenko');

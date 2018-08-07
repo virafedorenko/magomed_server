@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.add(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -30,6 +30,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserById(String id) {
-        return userRepository.findUserById(id);
+        return userRepository.findById(id).get();
     }
 }

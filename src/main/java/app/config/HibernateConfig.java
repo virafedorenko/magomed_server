@@ -1,3 +1,4 @@
+/*
 package app.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+*/
 /**
  * configuration of hibernate in the application. While working with heroku datasource bean is created automatically.
  * When move to another type of deployment or db datasource bean should be configured here.
- */
+ *//*
+
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfig {
@@ -42,3 +45,4 @@ public class HibernateConfig {
     }
 
 }
+*/

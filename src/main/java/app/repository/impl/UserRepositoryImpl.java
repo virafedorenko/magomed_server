@@ -1,3 +1,4 @@
+/*
 package app.repository.impl;
 
 import app.entity.User;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.hibernate.SessionFactory;
 
 @Repository
+
 public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
@@ -34,3 +36,4 @@ public class UserRepositoryImpl implements UserRepository {
         return (User) sessionFactory.getCurrentSession().save(user);
     }
 }
+*/

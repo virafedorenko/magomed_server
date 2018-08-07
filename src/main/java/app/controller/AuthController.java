@@ -7,6 +7,9 @@ import app.controller.request.RegistrationRequest;
 import app.controller.response.ApiResponse;
 import app.entity.User;
 import app.service.UserService;
+import org.omg.CORBA.Object;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,7 @@ import java.net.URI;
 
 @RestController
 public class AuthController {
+    private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -45,6 +49,7 @@ public class AuthController {
 
     @RequestMapping(name = "/signup", method = RequestMethod.POST)
     public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
+        LOG.info("In register method.....................");
         if (userService.findUserByEmail(registrationRequest.getEmail()) != null) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);

@@ -20,7 +20,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 
 @RestController
@@ -62,5 +64,10 @@ public class AuthController {
                 .buildAndExpand(registered.getEmail()).toUri();
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "User registered successfully"));
+    }
+
+    @GetMapping("/test")
+    public void test(HttpServletResponse response) throws IOException {
+        response.getWriter().write("Anastasia");
     }
 }

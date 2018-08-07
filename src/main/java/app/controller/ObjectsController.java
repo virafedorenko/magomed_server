@@ -16,6 +16,7 @@ import java.sql.SQLException;
 public class ObjectsController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ObjectsController.class);
+
     @Autowired
     DataSource dataSource;
     @Autowired

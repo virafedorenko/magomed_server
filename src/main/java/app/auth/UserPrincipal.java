@@ -32,9 +32,9 @@ public class UserPrincipal implements UserDetails {
         List<GrantedAuthority> authorities = new ArrayList<>();
         return new UserPrincipal(
                 user.getId(),
-                user.getName(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getName(),
                 authorities
         );
     }

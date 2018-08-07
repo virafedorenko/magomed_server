@@ -49,7 +49,7 @@ public class AuthController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
-    @RequestMapping(name = "/signup", method = RequestMethod.POST)
+    @PostMapping(name = "/signup")
     public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         LOG.info("In register method.....................");
         if (userService.findUserByEmail(registrationRequest.getEmail()) != null) {

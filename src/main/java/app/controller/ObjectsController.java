@@ -22,7 +22,7 @@ public class ObjectsController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @RequestMapping("/")
+    @RequestMapping("/test")
     public void test(HttpServletResponse response) throws SQLException, IOException {
         LOG.info(dataSource.getConnection().toString());
         String sql = "select count(*) from objects";

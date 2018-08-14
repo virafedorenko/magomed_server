@@ -7,6 +7,8 @@ import app.controller.request.RegistrationRequest;
 import app.controller.response.ApiResponse;
 import app.entity.User;
 import app.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
+@Api(value = "Authentication operations")
 public class AuthController {
     private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
     @Autowired
@@ -48,6 +51,7 @@ public class AuthController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
+    @ApiOperation(value = "Registration of user")
     @PostMapping(name = "/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         LOG.info("In register method.....................");

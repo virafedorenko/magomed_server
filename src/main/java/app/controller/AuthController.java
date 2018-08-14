@@ -27,7 +27,6 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@Api(value = "Authentication operations")
 public class AuthController {
     private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
     @Autowired
@@ -51,7 +50,6 @@ public class AuthController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
-    @ApiOperation(value = "Registration of user")
     @PostMapping(name = "/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         LOG.info("In register method.....................");

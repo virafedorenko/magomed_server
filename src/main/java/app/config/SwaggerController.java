@@ -1,21 +1,15 @@
 package app.config;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/")
 public class SwaggerController {
-/*
-    @RequestMapping(method = RequestMethod.GET)
-    public String swaggerUi() {
-        return "redirect:/swagger-ui.html";
-    }*/
+
     @RequestMapping(value= "/", method=RequestMethod.GET)
     public String corsHeaders(HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");

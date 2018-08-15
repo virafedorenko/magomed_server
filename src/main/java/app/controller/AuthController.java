@@ -27,6 +27,7 @@ import java.net.URI;
 @RestController
 public class AuthController {
     private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
+
     @Autowired
     private AuthenticationManager authenticationManager;
 

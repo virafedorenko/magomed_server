@@ -4,7 +4,6 @@ import app.auth.jwt.JwtAuthenticationEntryPoint;
 import app.auth.jwt.JwtAuthenticationFilter;
 import app.auth.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.IgnoredRequestCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,11 +16,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.OrRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
-import java.util.ArrayList;
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -60,14 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-    }
-    @Bean
-    public IgnoredRequestCustomizer optionsIgnoredRequestsCustomizer() {
-        return configurer -> {
-            List<RequestMatcher> matchers = new ArrayList<>();
-            matchers.add(new AntPathRequestMatcher("/**", "OPTIONS"));
-            configurer.requestMatchers(new OrRequestMatcher(matchers));
-        };
     }
 
     @Bean

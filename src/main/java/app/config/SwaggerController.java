@@ -16,11 +16,12 @@ public class SwaggerController {
     public String swaggerUi() {
         return "redirect:/swagger-ui.html";
     }*/
-    @RequestMapping(value= "/swagger-ui.html/**", method=RequestMethod.GET)
-    public void corsHeaders(HttpServletResponse response) {
+    @RequestMapping(value= "/", method=RequestMethod.GET)
+    public String corsHeaders(HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
         response.addHeader("Access-Control-Max-Age", "3600");
+        return "redirect:/swagger-ui.html";
     }
 }

@@ -7,8 +7,6 @@ import app.controller.request.RegistrationRequest;
 import app.controller.response.ApiResponse;
 import app.entity.User;
 import app.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +48,7 @@ public class AuthController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
-    @PostMapping(name = "/register")
+    @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         LOG.info("In register method.....................");
         if (userService.findUserByEmail(registrationRequest.getEmail()) != null) {

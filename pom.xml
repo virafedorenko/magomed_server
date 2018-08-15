@@ -18,7 +18,7 @@
         <springboot.version>2.0.3.RELEASE</springboot.version>
         <logback.version>1.2.3</logback.version>
         <jjwt.version>0.9.1</jjwt.version>
-        <springfox.version>2.9.1</springfox.version>
+        <springfox.version>2.9.2</springfox.version>
     </properties>
     <dependencies>
         <dependency>

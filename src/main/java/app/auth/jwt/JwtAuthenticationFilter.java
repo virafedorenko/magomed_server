@@ -32,7 +32,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwt = getJwtFromRequest(httpServletRequest);
-
             if (StringUtils.hasText(jwt) && jwtTokenProvider.isTokenValid(jwt)) {
                 String userId = jwtTokenProvider.getUserIdFromJwt(jwt);
 

@@ -1,5 +1,6 @@
 package app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class User implements Serializable {
     @Column
     private String email;
     @Column
+    @JsonIgnore
     private String password;
     @Column(name = "sname")
     private String name;

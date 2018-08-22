@@ -1,28 +1,26 @@
 package app.controller;
 
-import app.auth.jwt.JwtAuthenticationResponse;
 import app.auth.jwt.JwtTokenProvider;
 import app.controller.request.LoginRequest;
 import app.controller.request.RegistrationRequest;
-import app.controller.response.ApiResponse;
 import app.entity.User;
+import app.exception.BadRequestException;
 import app.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.net.URI;
 
 @RestController
 public class AuthController {
@@ -37,7 +35,8 @@ public class AuthController {
     private JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
+    @ResponseStatus(HttpStatus.OK)
+    public String login(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
@@ -45,25 +44,29 @@ public class AuthController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtTokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+        return jwtTokenProvider.generateToken(authentication);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public String register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         LOG.info("In register method.....................");
         if (userService.findUserByEmail(registrationRequest.getEmail()) != null) {
-            return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
-                    HttpStatus.BAD_REQUEST);
+            throw new BadRequestException("Username is already taken!");
         }
         User user = new User(registrationRequest.getEmail(), registrationRequest.getPassword(),
                 registrationRequest.getName());
         User registered = userService.register(user);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/users/{username}")
-                .buildAndExpand(registered.getEmail()).toUri();
-        return ResponseEntity.created(location)
-                .body(new ApiResponse(true, "User registered successfully"));
+
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(registered.getEmail());
+        loginRequest.setPassword(registrationRequest.getPassword());
+        return login(loginRequest);
+    }
+
+    @PostMapping("/logout")
+    public void logout(HttpServletRequest request) {
+        LOG.info("In logout method.....................");
     }
 
 }

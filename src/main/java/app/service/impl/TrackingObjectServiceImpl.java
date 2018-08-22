@@ -21,6 +21,6 @@ public class TrackingObjectServiceImpl implements TrackingObjectService {
 
     @Override
     public void delete(String id) {
-        trackingObjectRepository.deleteById(id);
+        // TODO: 8/22/2018  logic of removing
     }
 }

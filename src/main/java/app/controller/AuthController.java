@@ -5,6 +5,7 @@ import app.controller.request.LoginRequest;
 import app.controller.request.RegistrationRequest;
 import app.entity.User;
 import app.exception.BadRequestException;
+import app.exception.ResourceNotFoundException;
 import app.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -52,7 +50,7 @@ public class AuthController {
     public String register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         LOG.info("In register method.....................");
         if (userService.findUserByEmail(registrationRequest.getEmail()) != null) {
-            throw new BadRequestException("Username is already taken!");
+            throw new BadRequestException("Such username is already taken!");
         }
         User user = new User(registrationRequest.getEmail(), registrationRequest.getPassword(),
                 registrationRequest.getName());
@@ -62,6 +60,26 @@ public class AuthController {
         loginRequest.setEmail(registered.getEmail());
         loginRequest.setPassword(registrationRequest.getPassword());
         return login(loginRequest);
+    }
+
+    @GetMapping("/userById")
+    @ResponseStatus(HttpStatus.OK)
+    public User getUserById(@RequestParam("id") String id) {
+        User user = userService.findUserById(id);
+        if (user == null) {
+            throw new ResourceNotFoundException("User", "id", id);
+        }
+        return user;
+    }
+
+    @GetMapping("/userByEmail")
+    @ResponseStatus(HttpStatus.OK)
+    public User getUserByEmail(@RequestParam("email") String email) {
+        User user = userService.findUserByEmail(email);
+        if (user == null) {
+            throw new ResourceNotFoundException("User", "email", email);
+        }
+        return user;
     }
 
     @PostMapping("/logout")

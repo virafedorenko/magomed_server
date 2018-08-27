@@ -32,6 +32,6 @@ public class TrackingEventServiceImpl implements TrackingEventService {
 
     @Override
     public List<TrackingEvent> getByObject(String objectId) {
-        return trackingEventRepository.getByObject(objectId);
+        return trackingEventRepository.findByObject(objectId);
     }
 }

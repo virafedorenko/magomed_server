@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.auth.jwt.JwtAuthenticationResponse;
 import app.auth.jwt.JwtTokenProvider;
 import app.controller.request.LoginRequest;
 import app.controller.request.RegistrationRequest;
@@ -34,7 +35,7 @@ public class AuthController {
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
-    public String login(@Valid @RequestBody LoginRequest loginRequest) {
+    public JwtAuthenticationResponse login(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
@@ -42,12 +43,13 @@ public class AuthController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return jwtTokenProvider.generateToken(authentication);
+        String token = jwtTokenProvider.generateToken(authentication);
+        return new JwtAuthenticationResponse(token);
     }
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public String register(@Valid @RequestBody RegistrationRequest registrationRequest) {
+    public JwtAuthenticationResponse register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         LOG.info("In register method.....................");
         if (userService.findUserByEmail(registrationRequest.getEmail()) != null) {
             throw new BadRequestException("Such username is already taken!");

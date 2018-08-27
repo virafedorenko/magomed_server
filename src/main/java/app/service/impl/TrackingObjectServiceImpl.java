@@ -4,7 +4,11 @@ import app.entity.TrackingObject;
 import app.repository.TrackingObjectRepository;
 import app.service.TrackingObjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class TrackingObjectServiceImpl implements TrackingObjectService {
     @Autowired
     private TrackingObjectRepository trackingObjectRepository;

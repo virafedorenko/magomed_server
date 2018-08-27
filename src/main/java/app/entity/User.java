@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -21,6 +22,9 @@ public class User implements Serializable {
     private String password;
     @Column(name = "sname")
     private String name;
+
+    @OneToMany(mappedBy = "user")
+    private Set<TrackingObject> trackingObjects;
 
     public User() {
     }
@@ -61,6 +65,14 @@ public class User implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<TrackingObject> getTrackingObjects() {
+        return trackingObjects;
+    }
+
+    public void setTrackingObjects(Set<TrackingObject> trackingObjects) {
+        this.trackingObjects = trackingObjects;
     }
 
     @Override

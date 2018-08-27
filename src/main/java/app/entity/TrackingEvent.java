@@ -18,7 +18,7 @@ public class TrackingEvent {
     @Column
     private String comment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "object_id")
     private TrackingObject object;
 

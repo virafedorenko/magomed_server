@@ -15,9 +15,11 @@ public class TrackingObject {
     private String id;
     @Column(name = "sname")
     private String name;
-    @OneToMany(mappedBy="object")
+    @OneToMany(mappedBy = "object")
     private Set<TrackingEvent> events;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public String getId() {
         return id;
@@ -41,6 +43,14 @@ public class TrackingObject {
 
     public void setEvents(Set<TrackingEvent> events) {
         this.events = events;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

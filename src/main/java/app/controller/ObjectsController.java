@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ObjectsController {
 
@@ -32,5 +34,10 @@ public class ObjectsController {
     @DeleteMapping("/deleteTrackingObject")
     public void deleteTrackingObject(@RequestParam(name = "id") String id) {
         trackingObjectService.delete(id);
+    }
+
+    @GetMapping("/getObjectsByUser")
+    public List<TrackingObject> getObjectsByUser(@RequestParam(name = "id") String id) {
+        return trackingObjectService.getByUser(id);
     }
 }

@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class EventsController {
     private static final Logger LOG = LoggerFactory.getLogger(ObjectsController.class);
@@ -31,5 +33,10 @@ public class EventsController {
     @DeleteMapping("/deleteTrackingEvent")
     public void deleteTrackingObject(@RequestParam(name = "id") String id) {
         trackingEventService.delete(id);
+    }
+
+    @GetMapping("/getEventsByObject")
+    public List<TrackingEvent> getEventsByObject(@RequestParam(name = "id") String id) {
+        return trackingEventService.getByObject(id);
     }
 }

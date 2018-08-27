@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class TrackingEventServiceImpl implements TrackingEventService {
@@ -26,5 +28,10 @@ public class TrackingEventServiceImpl implements TrackingEventService {
     @Override
     public void delete(String id) {
 // TODO: 8/27/2018 implement logic for removing of event
+    }
+
+    @Override
+    public List<TrackingEvent> getByObject(String objectId) {
+        return trackingEventRepository.getByObject(objectId);
     }
 }

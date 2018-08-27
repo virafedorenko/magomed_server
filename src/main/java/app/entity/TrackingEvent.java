@@ -1,6 +1,5 @@
 package app.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -19,7 +18,7 @@ public class TrackingEvent {
     @Column
     private String comment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "object_id")
     private TrackingObject object;
 

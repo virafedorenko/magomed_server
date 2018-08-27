@@ -19,7 +19,7 @@ public class TrackingObject {
     @OneToMany(mappedBy = "object")
     @JsonIgnore
     private Set<TrackingEvent> events;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

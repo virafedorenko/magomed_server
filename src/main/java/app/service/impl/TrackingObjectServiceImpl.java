@@ -1,6 +1,7 @@
 package app.service.impl;
 
 import app.entity.TrackingObject;
+import app.entity.User;
 import app.repository.TrackingObjectRepository;
 import app.service.TrackingObjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class TrackingObjectServiceImpl implements TrackingObjectService {
     }
 
     @Override
-    public List<TrackingObject> getByUser(String userId) {
-        return trackingObjectRepository.findByUser(userId);
+    public List<TrackingObject> getByUser(User user) {
+        return trackingObjectRepository.findByUser(user);
     }
 }

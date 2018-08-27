@@ -1,6 +1,7 @@
 package app.service.impl;
 
 import app.entity.TrackingEvent;
+import app.entity.TrackingObject;
 import app.repository.TrackingEventRepository;
 import app.service.TrackingEventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class TrackingEventServiceImpl implements TrackingEventService {
     }
 
     @Override
-    public List<TrackingEvent> getByObject(String objectId) {
-        return trackingEventRepository.findByObject(objectId);
+    public List<TrackingEvent> getByObject(TrackingObject object) {
+        return trackingEventRepository.findByObject(object);
     }
 }

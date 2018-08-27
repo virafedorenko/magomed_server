@@ -1,6 +1,7 @@
 package app.service;
 
 import app.entity.TrackingEvent;
+import app.entity.TrackingObject;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface TrackingEventService {
 
     void delete(String id);
 
-    List<TrackingEvent> getByObject(String objectId);
+    List<TrackingEvent> getByObject(TrackingObject object);
 }

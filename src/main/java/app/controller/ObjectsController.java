@@ -1,8 +1,10 @@
 package app.controller;
 
 import app.entity.TrackingObject;
+import app.entity.User;
 import app.exception.ResourceNotFoundException;
 import app.service.TrackingObjectService;
+import app.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class ObjectsController {
     private static final Logger LOG = LoggerFactory.getLogger(ObjectsController.class);
     @Autowired
     private TrackingObjectService trackingObjectService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/trackingObject")
     public TrackingObject getTrackingObject(@RequestParam(name = "id") String id) {
@@ -38,6 +42,7 @@ public class ObjectsController {
 
     @GetMapping("/getObjectsByUser")
     public List<TrackingObject> getObjectsByUser(@RequestParam(name = "id") String id) {
-        return trackingObjectService.getByUser(id);
+        User user = userService.findUserById(id);
+        return trackingObjectService.getByUser(user);
     }
 }

@@ -24,6 +24,7 @@ public class User implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private Set<TrackingObject> trackingObjects;
 
     public User() {

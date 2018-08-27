@@ -21,7 +21,6 @@ public class TrackingEvent {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "object_id")
-    @JsonIgnore
     private TrackingObject object;
 
     public String getId() {

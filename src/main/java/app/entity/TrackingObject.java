@@ -17,10 +17,10 @@ public class TrackingObject {
     @Column(name = "sname")
     private String name;
     @OneToMany(mappedBy = "object")
+    @JsonIgnore
     private Set<TrackingEvent> events;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User user;
 
     public String getId() {

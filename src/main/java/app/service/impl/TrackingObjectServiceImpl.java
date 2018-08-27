@@ -32,6 +32,6 @@ public class TrackingObjectServiceImpl implements TrackingObjectService {
 
     @Override
     public List<TrackingObject> getByUser(String userId) {
-        return trackingObjectRepository.getByUser(userId);
+        return trackingObjectRepository.findByUser(userId);
     }
 }

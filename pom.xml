@@ -19,6 +19,9 @@
         <logback.version>1.2.3</logback.version>
         <jjwt.version>0.9.1</jjwt.version>
         <springfox.version>2.9.2</springfox.version>
+        <spring.social.version>1.1.6.RELEASE</spring.social.version>
+        <spring.social.facebook.version>2.0.3.RELEASE</spring.social.facebook.version>
+        <spring.social.google.version>1.0.0.RELEASE</spring.social.google.version>
     </properties>
     <dependencies>
         <dependency>
@@ -83,6 +86,31 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${springfox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-core</artifactId>
+            <version>${spring.social.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-config</artifactId>
+            <version>${spring.social.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-facebook</artifactId>
+            <version>${spring.social.facebook.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-google</artifactId>
+            <version>${spring.social.google.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>1.5.2.RELEASE</version>
         </dependency>
     </dependencies>
 

@@ -67,6 +67,18 @@ public class AuthController {
         return login(loginRequest);
     }
 
+    @GetMapping("/currentUser")
+    @ResponseStatus(HttpStatus.OK)
+    public User getCurrentUser(HttpServletRequest request) {
+        String jwt = jwtTokenProvider.getJwtFromRequest(request);
+        String userId = jwtTokenProvider.getUserIdFromJwt(jwt);
+        User user = userService.findUserById(userId);
+        if (user == null) {
+            throw new ResourceNotFoundException("User", "id", userId);
+        }
+        return user;
+    }
+
     @GetMapping("/userById")
     @ResponseStatus(HttpStatus.OK)
     public User getUserById(@RequestParam("id") String id) {

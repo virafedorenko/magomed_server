@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.auth.UserPrincipal;
+import app.auth.jwt.JwtTokenProvider;
 import app.entity.TrackingObject;
 import app.entity.User;
 import app.exception.ResourceNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -23,6 +25,8 @@ public class ObjectsController {
     private TrackingObjectService trackingObjectService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     @GetMapping("/trackingObject")
     public TrackingObject getTrackingObject(@RequestParam(name = "id") String id) {
@@ -49,8 +53,10 @@ public class ObjectsController {
     }
 
     @GetMapping("/getObjectsByUser")
-    public List<TrackingObject> getObjectsByUser(@RequestParam(name = "id") String id) {
-        User user = userService.findUserById(id);
+    public List<TrackingObject> getObjectsByUser(HttpServletRequest request) {
+        String jwt = jwtTokenProvider.getJwtFromRequest(request);
+        String userId = jwtTokenProvider.getUserIdFromJwt(jwt);
+        User user = userService.findUserById(userId);
         return trackingObjectService.getByUser(user);
     }
 }

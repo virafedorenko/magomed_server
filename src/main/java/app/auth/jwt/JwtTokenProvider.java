@@ -27,8 +27,8 @@ public class JwtTokenProvider {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Date now = new Date();
-        long jwtExpirationInMs = Long.parseLong(this.jwtExpirationInMs);
-        Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
+        long expiration = Long.parseLong(this.jwtExpirationInMs);
+        Date expiryDate = new Date(now.getTime() + expiration);
 
         return Jwts.builder()
                 .setSubject(userPrincipal.getId())

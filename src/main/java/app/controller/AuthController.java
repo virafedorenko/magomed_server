@@ -2,7 +2,6 @@ package app.controller;
 
 import app.auth.jwt.JwtAuthenticationResponse;
 import app.auth.jwt.JwtTokenProvider;
-import app.auth.social.FacebookProvider;
 import app.controller.request.LoginRequest;
 import app.controller.request.RegistrationRequest;
 import app.entity.User;
@@ -28,8 +27,7 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-    @Autowired
-    private FacebookProvider facebookProvider;
+
 
     @Autowired
     private UserService userService;
@@ -58,7 +56,7 @@ public class AuthController {
             throw new BadRequestException("Such username is already taken!");
         }
         User user = new User(registrationRequest.getEmail(), registrationRequest.getPassword(),
-                registrationRequest.getName());
+                registrationRequest.getName(),registrationRequest.getSurname());
         User registered = userService.register(user);
 
         LoginRequest loginRequest = new LoginRequest();
@@ -97,12 +95,6 @@ public class AuthController {
             throw new ResourceNotFoundException("User", "email", email);
         }
         return user;
-    }
-
-    @GetMapping("/fb")
-    @ResponseStatus(HttpStatus.OK)
-    public User fb() {
-        return facebookProvider.getUserDataFromFacebook();
     }
 
     @PostMapping("/logout")

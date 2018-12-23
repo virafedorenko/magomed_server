@@ -1,7 +1,7 @@
 package app.repository;
 
-import app.entity.TrackingObject;
-import app.entity.User;
+import app.entity.Peak;
+import app.entity.Root;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TrackingObjectRepository extends CrudRepository<TrackingObject, String> {
-
-    List<TrackingObject> findByUser(@Param("user") User user);
+public interface PeakRepository extends CrudRepository<Peak, String> {
+    List<Peak> findByRoot(@Param("root") Root root);
 }

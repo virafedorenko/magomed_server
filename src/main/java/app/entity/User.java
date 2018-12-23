@@ -5,7 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -16,24 +17,22 @@ public class User implements Serializable {
     @Column
     private String id;
     @Column
+    private String password;
+    @Column
     private String email;
     @Column
-    @JsonIgnore
-    private String password;
-    @Column(name = "sname")
     private String name;
-
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private Set<TrackingObject> trackingObjects;
+    @Column
+    private String surname;
 
     public User() {
     }
 
-    public User(String email, String password, String name) {
-        this.email = email;
+    public User(String email, String password, String name, String surname) {
         this.password = password;
+        this.email = email;
         this.name = name;
+        this.surname = surname;
     }
 
     public String getId() {
@@ -68,33 +67,28 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public Set<TrackingObject> getTrackingObjects() {
-        return trackingObjects;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public void setTrackingObjects(Set<TrackingObject> trackingObjects) {
-        this.trackingObjects = trackingObjects;
+    public String getSurname() {
+        return surname;
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         User user = (User) o;
-
-        if (!id.equals(user.id)) return false;
-        if (!email.equals(user.email)) return false;
-        if (!password.equals(user.password)) return false;
-        return name != null ? name.equals(user.name) : user.name == null;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(surname, user.surname);
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return Objects.hash(id, email, name, surname);
     }
 }

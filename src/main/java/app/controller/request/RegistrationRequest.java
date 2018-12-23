@@ -8,7 +8,9 @@ public class RegistrationRequest {
     @NotBlank
     @Size(max = 40)
     private String name;
-
+    @NotBlank
+    @Size(max = 40)
+    private String surname;
     @NotBlank
     @Size(max = 40)
     @Email
@@ -40,5 +42,13 @@ public class RegistrationRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 }

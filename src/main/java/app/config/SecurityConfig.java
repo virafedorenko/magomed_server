@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login/**", "/register")
+                .antMatchers("/login/**", "/register","/peaks")
                 .permitAll()
                 .antMatchers("/v2/api-docs", "/fb", "/", "/favicon.ico", "/configuration/ui"
                         , "/swagger-resources/**", "/configuration/security", "/swagger-ui.html",
